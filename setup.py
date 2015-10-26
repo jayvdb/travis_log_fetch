@@ -60,6 +60,9 @@ with open(_package_init_py) as version_file:
 
 version = version_line.split(' = ')[1][1:-2]
 
+with open('README-pypi.rst') as readme_file:
+    long_description = readme_file.read()
+
 slug = _user + '/' + _package_name
 
 setup(
@@ -74,7 +77,7 @@ setup(
         ],
     },
     description='Command line tool to fetch Travis-CI logs.',
-    long_description='Command line tool to fetch Travis-CI logs.',
+    long_description=long_description,
     author='John Vandenberg',
     author_email='jayvdb@gmail.com',
     license='MIT',
