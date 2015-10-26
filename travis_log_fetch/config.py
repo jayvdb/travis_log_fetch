@@ -6,6 +6,7 @@ from __future__ import unicode_literals
 import sys
 
 from logging import getLogger
+from os.path import expanduser
 from textwrap import dedent
 
 import configargparse
@@ -35,7 +36,8 @@ def get_parser():
 
     parser.add('-c', '--config', is_config_file=True,
                help='config file path')
-    parser.add('-d', '--dir', help='log storage directory')
+    parser.add('-d', '--dir', help='log storage directory',
+               default='~/.travis')
     parser.add('--access-token', required=False, help='Github access token',
                env_var='GITHUB_ACCESS_TOKEN')
     parser.add('-v', '--verbose', help='verbose', action='store_true')
@@ -69,12 +71,12 @@ def get_options():
             args = []
         try:
             _options = parser.parse_args(args=args)
+            __logs__.debug('config options: {0}'.format(_options))
         except SystemExit:
             __logs__.warning('failed to load options')
             return
 
-        # needed?
-        # _options.dir = os.path.abspath(_options.dir)
+        _options.dir = expanduser(_options.dir)
 
     return _options
 

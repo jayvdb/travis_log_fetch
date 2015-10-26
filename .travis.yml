@@ -10,6 +10,7 @@ notifications:
   email: false
 env:
   matrix:
+    - TOXENV=flake8-py3
     - TOXENV=py27
     - TOXENV=py33
     - TOXENV=py34
