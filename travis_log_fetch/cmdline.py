@@ -38,8 +38,8 @@ def main():
     if not options or options.verbose:
         logging.basicConfig(
             level=logging.DEBUG,
-            format="%(asctime)s %(levelname)9s %(message)s",
-            datefmt="%Y-%m-%d %H:%M:%S")
+            format='%(asctime)s %(levelname)9s %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S')
 
     __logs__.debug('{0!r}'.format(options))
 
