@@ -1,0 +1,16 @@
+sudo: false
+language: python
+cache:
+  directories:
+  - ${HOME}/.cache
+script:
+  - pip install tox
+  - tox
+notifications:
+  email: false
+env:
+  matrix:
+    - TOXENV=py27
+    - TOXENV=py33
+    - TOXENV=py34
+

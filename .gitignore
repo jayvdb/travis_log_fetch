@@ -1,0 +1,15 @@
+*.bak
+*.pyc
+*.pyo
+*.*~
+/.tox
+/.eggs/
+/.cache/
+/*.egg
+/*.egg-info/
+*pycache*
+.idea
+build
+dist
+docs/_build/
+tests/live_data
