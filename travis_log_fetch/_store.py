@@ -166,7 +166,7 @@ def download_job_log(base_dir, job, log_filename_format=None):
     # FIXME(upstream): https://github.com/menegazzo/travispy/pull/27
     if not text:
         __logs__.info('fetching job {0} log directly'.format(job.id))
-        r = requests.get('https://api.travis-ci.org/jobs/%s/log' % job.id,
+        r = requests.get('%s/jobs/%s/log' % (job._session.uri, job.id),
                          headers=_HEADERS)
         text = r.content.decode('utf-8')
 

@@ -40,6 +40,9 @@ def get_parser():
                default='~/.travis')
     parser.add('--access-token', required=False, help='Github access token',
                env_var='GITHUB_ACCESS_TOKEN')
+    parser.add('--api', required=False,
+               help='Travis API CI URL; use "pro" for Travis CI Pro',
+               default=travispy.travispy.PUBLIC)
     parser.add('-v', '--verbose', help='verbose', action='store_true')
     parser.add('-r', '--refresh', help='refresh', action='store_true')
     parser.add('--forks', help='fetch forks', action='store_true')
@@ -72,6 +75,8 @@ def get_options():
 
         try:
             _options = parser.parse_args(args=args)
+            if _options.api == 'pro':
+                _options.api = travispy.travispy.PRIVATE
             __logs__.debug('config options: {0}'.format(_options))
         except SystemExit:
             if pytest:
@@ -92,10 +97,11 @@ def _get_travispy():
     if not _travispy:
         options = get_options()
         if options and options.access_token:
-            _travispy = travispy.TravisPy.github_auth(options.access_token)
+            _travispy = travispy.TravisPy.github_auth(
+                options.access_token, uri=options.api)
             __logs__.debug('logged into travis-ci')
         else:
-            _travispy = travispy.TravisPy()
+            _travispy = travispy.TravisPy(uri=options.api)
             __logs__.debug('anon travis-ci activated')
 
     return _travispy
