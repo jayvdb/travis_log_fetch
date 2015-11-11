@@ -66,15 +66,19 @@ def get_options():
 
     if not _options:
         parser = get_parser()
-        args = None
-        if sys.argv[0].endswith('/py.test'):
-            args = []
+
+        pytest = sys.argv[0].endswith('/py.test')
+        args = [] if pytest else None
+
         try:
             _options = parser.parse_args(args=args)
             __logs__.debug('config options: {0}'.format(_options))
         except SystemExit:
-            __logs__.warning('failed to load options')
-            return
+            if pytest:
+                __logs__.warning('failed to load options')
+                return
+
+            raise
 
         _options.dir = expanduser(_options.dir)
 
