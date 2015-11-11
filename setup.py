@@ -11,6 +11,8 @@ from setuptools import setup
 
 from setuptools.command.test import test as TestCommand  # noqa: N812
 
+PY26 = sys.version_info[0:2] < (2, 7)
+
 
 class PyTest(TestCommand):
     """Test harness."""
@@ -43,8 +45,8 @@ dependencies = [
     'github3.py>=1.0.0a1',
     'parse',
     'python-dateutil',
-    'ConfigArgParse',
 ]
+dependencies.append('ConfigArgParse>=0.10.0' if PY26 else 'ConfigArgParse')
 
 dependency_links = [
     'git+https://github.com/jayvdb/travispy@fetch-log#egg=travispy-0.3.3'
@@ -96,6 +98,7 @@ setup(
         'Operating System :: POSIX :: Linux',
         'Operating System :: Unix',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Quality Assurance',
