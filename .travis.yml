@@ -14,7 +14,8 @@ cache:
 script:
   - pip install tox
   - tox -e flake8
-  - tox -e py"${TRAVIS_PYTHON_VERSION/./}"
+  - if [[ ${TRAVIS_PYTHON_VERSION%py} != ${TRAVIS_PYTHON_VERSION} ]]; then export TOXENV=${TRAVIS_PYTHON_VERSION}; else TOXENV=py"${TRAVIS_PYTHON_VERSION/./}"; fi
+  - tox -e $TOXENV
 notifications:
   email: false
 
