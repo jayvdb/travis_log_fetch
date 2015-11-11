@@ -1,18 +1,20 @@
 sudo: false
 language: python
+
+python:
+  - "2.7"
+  - "2.6"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+
 cache:
   directories:
   - ${HOME}/.cache
 script:
   - pip install tox
-  - tox
+  - tox -e flake8
+  - tox -e py"${TRAVIS_PYTHON_VERSION/./}"
 notifications:
   email: false
-env:
-  matrix:
-    - TOXENV=flake8-py3
-    - TOXENV=py26
-    - TOXENV=py27
-    - TOXENV=py33
-    - TOXENV=py34
 
