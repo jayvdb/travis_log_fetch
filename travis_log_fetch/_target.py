@@ -3,6 +3,13 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+import sys
+
+if sys.version_info[0] == 2:
+    from urlparse import urlparse
+else:
+    from urllib.parse import urlparse
+
 from travispy import Build, Job, Repo
 
 
@@ -153,9 +160,11 @@ class Target(object):
     @classmethod
     def from_url(cls, url):
         """Create an Target from a travis url."""
-        _, _, path = url.partition('//travis-ci.org/')
-        assert path
-        path, _, line_no = path.partition('#')
+        parsed_url = urlparse(url)
+        assert parsed_url.path
+        assert len(parsed_url.path) > 1
+
+        path = parsed_url.path[1:]
 
         parts = path.split('/')
 
