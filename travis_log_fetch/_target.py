@@ -143,7 +143,7 @@ class Target(object):
 
         if logical_id:
             build_number, sep, job_number = logical_id.partition('.')
-            assert(build_number)
+            assert build_number
             build_number = int(build_number)
             if job_number:
                 job_number = int(job_number)

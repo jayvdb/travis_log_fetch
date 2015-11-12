@@ -49,7 +49,7 @@ dependencies = [
 dependencies.append('ConfigArgParse>=0.10.0' if PY26 else 'ConfigArgParse')
 
 dependency_links = [
-    'git+https://github.com/jayvdb/travispy@fetch-log#egg=travispy-0.3.3'
+    'git+https://github.com/jayvdb/travispy@fetch-log#egg=travispy-0.3.3',
 ]
 
 _package_init_py = os.path.join(os.path.dirname(__file__),
