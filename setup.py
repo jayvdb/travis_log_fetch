@@ -48,10 +48,6 @@ dependencies = [
 ]
 dependencies.append('ConfigArgParse>=0.10.0' if PY26 else 'ConfigArgParse')
 
-dependency_links = [
-    'git+https://github.com/jayvdb/travispy@fetch-log#egg=travispy-0.3.3',
-]
-
 _package_init_py = os.path.join(os.path.dirname(__file__),
                                 _package_name,
                                 '__init__.py')
@@ -72,7 +68,6 @@ setup(
     packages=find_packages(),
     version=version,
     install_requires=dependencies,
-    dependency_links=dependency_links,
     entry_points={
         'console_scripts': [
             'travis_log_fetch = travis_log_fetch:main',
